@@ -7,6 +7,10 @@ resolver: lts-5.12
 # Local packages, usually specified by relative directory name
 packages:
 - '.'
+- location:
+    git: https://github.com/rlupton20/haskell-etcd
+    commit: 7cd9af9c35e76326c7c4b45a76dbe8eb068e5d99
+    
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
 extra-deps: []
 

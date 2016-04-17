@@ -4,13 +4,15 @@ module Config where
 import Data.Yaml
 import Control.Applicative
 
+import Control.Monad.IO.Class
+
 data WetcdConfig = WetcdConfig { server :: ServerConfig
                                , backend :: BackendConfig } deriving (Show)
 
 data ServerConfig = ServerConfig { port :: Int } deriving (Show)
 
 data BackendConfig = BackendConfig { db :: String
-                                  , address :: String } deriving (Show)
+                                   , address :: String } deriving (Show)
 
 
 instance FromJSON WetcdConfig where
@@ -26,3 +28,8 @@ instance FromJSON BackendConfig where
 
 loadConfigFromFile :: String -> IO (Either ParseException WetcdConfig)
 loadConfigFromFile = decodeFileEither
+
+withConfig :: (MonadIO m) =>  String -> (WetcdConfig -> m a) -> m a
+withConfig file action = do
+  pconfig <- liftIO $ loadConfigFromFile file
+  either (fail.show) action pconfig
