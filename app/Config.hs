@@ -7,16 +7,19 @@ import Control.Applicative
 import Control.Monad.IO.Class
 
 data WetcdConfig = WetcdConfig { server :: ServerConfig
-                               , backend :: BackendConfig } deriving (Show)
+                               , backend :: BackendConfig
+                               , tls :: TLSConfig }
 
-data ServerConfig = ServerConfig { port :: Int } deriving (Show)
+data ServerConfig = ServerConfig { port :: Int }
 
 data BackendConfig = BackendConfig { db :: String
-                                   , address :: String } deriving (Show)
+                                   , address :: String }
 
+data TLSConfig = TLSConfig { key :: String
+                           , cert :: String }
 
 instance FromJSON WetcdConfig where
-  parseJSON (Object v) = WetcdConfig <$> v .: "server" <*> v .: "backend"
+  parseJSON (Object v) = WetcdConfig <$> v .: "server" <*> v .: "backend" <*> v .: "tls"
 
 instance FromJSON ServerConfig where
   parseJSON (Object v) = ServerConfig <$> v .: "port"
@@ -25,6 +28,9 @@ instance FromJSON ServerConfig where
 instance FromJSON BackendConfig where
   parseJSON (Object v) = BackendConfig <$> v .: "db" <*> v .: "address"
   parseJSON _ = empty
+
+instance FromJSON TLSConfig where
+  parseJSON (Object v) = TLSConfig <$> v .: "key" <*> v .: "cert"
 
 loadConfigFromFile :: String -> IO (Either ParseException WetcdConfig)
 loadConfigFromFile = decodeFileEither

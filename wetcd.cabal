@@ -28,6 +28,7 @@ executable wetcd-exe
                      , wetcd
                      , yaml
                      , warp
+                     , warp-tls
                      , wai
                      , http-types
                      , transformers
