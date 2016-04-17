@@ -1,3 +1,6 @@
 # Ignore text editor stuff
 *~
 *#
+
+# Ignore stack's working directory
+.stack-work

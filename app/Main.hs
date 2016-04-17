@@ -1,6 +1,8 @@
 module Main where
 
-import Lib
+import Config
 
 main :: IO ()
-main = someFunc
+main = do
+       conf <- loadConfigFromFile "testConf.yaml"
+       putStrLn $ show conf

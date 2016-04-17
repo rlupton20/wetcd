@@ -1,0 +1,6 @@
+server:
+  port: 8000
+
+backend:
+  db: etcd
+  address: 127.0.0.1:2379
