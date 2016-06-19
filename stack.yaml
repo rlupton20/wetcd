@@ -43,7 +43,7 @@ docker:
 
 image:
   container:
-    name: vanguard-comnode
+    name: wetcd-interrogator
     base: fpco/stack-run
     add:
-      .: /app/
+      .: /config/

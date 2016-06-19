@@ -8,7 +8,13 @@ services:
     ports:
       - "443:443"
     depends_on:
+      - interrogator
+
+  interrogator:
+    build: interrogator/
+    depends_on:
       - etcd
+
   etcd:
     image: quay.io/coreos/etcd
     command: >

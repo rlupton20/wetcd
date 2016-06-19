@@ -5,8 +5,8 @@ import Config
 
 import Network.Wai
 import Network.HTTP.Types
-import Network.Wai.Handler.WarpTLS
-import Network.Wai.Handler.Warp (defaultSettings, setPort)
+-- import Network.Wai.Handler.WarpTLS
+import Network.Wai.Handler.Warp (run, defaultSettings, setPort)
 
 import Data.DHT.Etcd
 
@@ -17,11 +17,11 @@ import Data.String
 
 main :: IO ()
 main = do
-       withConfig "testConf.yaml" $ \conf -> do
+       withConfig "/config/testConf.yaml" $ \conf -> do
          let etcdNode = etcd (address.backend $ conf)
-             tlsConf = tlsSettings (cert.tls $ conf) (key.tls $ conf)
-         runTLS tlsConf (setPort (port.server $ conf) defaultSettings) $ authenticator (query etcdNode)
-       
+             -- tlsConf = tlsSettings (cert.tls $ conf) (key.tls $ conf)
+         -- runTLS tlsConf (setPort (port.server $ conf) defaultSettings) $ authenticator (query etcdNode)
+         run (port.server $ conf) $ authenticator (query etcdNode)
 
 -- |query forwards a request to etcd
 query :: Etcd -> Application
