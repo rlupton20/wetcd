@@ -26,9 +26,10 @@ main = do
 -- |query forwards a request to etcd
 query :: Etcd -> Application
 query etcdNode req respond = do
-  let path = B.unpack $ rawPathInfo req
+  let headers = requestHeaders req
+      path = B.unpack $ rawPathInfo req
   res <- getRaw etcdNode path
-  respond $ responseLBS status200 [] $ fromString res
+  respond $ responseLBS status200 [] $ fromString (res ++ show headers)
 
 
 -- | authenticator is a piece of middleware that restricts which
