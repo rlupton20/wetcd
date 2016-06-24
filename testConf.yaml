@@ -4,7 +4,3 @@ server:
 backend:
   db: etcd
   address: etcd:2379
-
-tls:
-  key: tls/testkey.pem
-  cert: tls/testcert.pem

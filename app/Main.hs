@@ -19,8 +19,6 @@ main :: IO ()
 main = do
        withConfig "/config/testConf.yaml" $ \conf -> do
          let etcdNode = etcd (address.backend $ conf)
-             -- tlsConf = tlsSettings (cert.tls $ conf) (key.tls $ conf)
-         -- runTLS tlsConf (setPort (port.server $ conf) defaultSettings) $ authenticator (query etcdNode)
          run (port.server $ conf) $ authenticator (query etcdNode)
 
 -- |query forwards a request to etcd

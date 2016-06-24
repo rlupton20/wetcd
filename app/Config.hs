@@ -29,9 +29,6 @@ instance FromJSON BackendConfig where
   parseJSON (Object v) = BackendConfig <$> v .: "db" <*> v .: "address"
   parseJSON _ = empty
 
-instance FromJSON TLSConfig where
-  parseJSON (Object v) = TLSConfig <$> v .: "key" <*> v .: "cert"
-
 loadConfigFromFile :: String -> IO (Either ParseException WetcdConfig)
 loadConfigFromFile = decodeFileEither
 
