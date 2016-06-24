@@ -11,7 +11,7 @@ import Network.Wai.Handler.Warp (run, defaultSettings, setPort)
 import Data.DHT.Etcd
 
 import qualified Data.ByteString.Char8 as B
-
+import Data.Text
 -- Temp
 import Data.String
 
@@ -38,3 +38,10 @@ query etcdNode req respond = do
 -- responses through.
 authenticator :: Middleware
 authenticator = id
+
+-- bool reject action $ permitted fingerprint request
+
+newtype Fingerprint = Fingerprint Text deriving (Eq)
+
+permitted :: Fingerprint -> Request -> Bool
+permitted = undefined

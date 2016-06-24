@@ -28,12 +28,12 @@ executable wetcd-exe
                      , wetcd
                      , yaml
                      , warp
---                     , warp-tls
                      , wai
                      , http-types
                      , transformers
                      , haskell-etcd
                      , bytestring
+                     , text
   default-language:    Haskell2010
 
 test-suite wetcd-test
