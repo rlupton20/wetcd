@@ -5,7 +5,6 @@ import Config
 
 import Network.Wai
 import Network.HTTP.Types
--- import Network.Wai.Handler.WarpTLS
 import Network.Wai.Handler.Warp (run, defaultSettings, setPort)
 
 import Data.DHT.Etcd

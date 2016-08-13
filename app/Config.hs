@@ -7,19 +7,16 @@ import Control.Applicative
 import Control.Monad.IO.Class
 
 data WetcdConfig = WetcdConfig { server :: ServerConfig
-                               , backend :: BackendConfig
-                               , tls :: TLSConfig }
+                               , backend :: BackendConfig }
 
 data ServerConfig = ServerConfig { port :: Int }
 
 data BackendConfig = BackendConfig { db :: String
                                    , address :: String }
 
-data TLSConfig = TLSConfig { key :: String
-                           , cert :: String }
 
 instance FromJSON WetcdConfig where
-  parseJSON (Object v) = WetcdConfig <$> v .: "server" <*> v .: "backend" <*> v .: "tls"
+  parseJSON (Object v) = WetcdConfig <$> v .: "server" <*> v .: "backend" 
 
 instance FromJSON ServerConfig where
   parseJSON (Object v) = ServerConfig <$> v .: "port"
