@@ -46,4 +46,4 @@ image:
     name: wetcd-interrogator
     base: fpco/stack-run
     add:
-      .: /config/
+      config: /config/
