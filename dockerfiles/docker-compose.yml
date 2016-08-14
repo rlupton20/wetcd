@@ -17,6 +17,4 @@ services:
 
   etcd:
     image: quay.io/coreos/etcd
-    command: >
-      --listen-client-urls 'http://etcd:2379'
-      --advertise-client-urls 'http://etcd:2379'
+    command: etcd --listen-client-urls 'http://etcd:2379' --advertise-client-urls 'http://etcd:2379'
